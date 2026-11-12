@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08131f">
+<title>CricketLive — Live Cricket Scores</title>
+<style>
+:root{--bg:#08131f;--panel:#112131;--line:#263b4c;--muted:#9aabba;--white:#f4f7fb;--lime:#baf36b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#08131fee;border-bottom:1px solid var(--line);padding:15px max(18px,5vw);display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:900;letter-spacing:1px}.logo span{color:var(--lime)}button,a{cursor:pointer}nav{display:flex;gap:20px}nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:bold}
+.actions{display:flex;gap:8px}button{border:1px solid var(--line);background:var(--panel);color:var(--white);padding:10px 13px;border-radius:8px;font-weight:bold}
+main{max-width:1100px;margin:auto;padding:0 18px}.hero{margin:25px 0 45px;padding:48px 7%;border-radius:22px;background:radial-gradient(circle at 80% 40%,#315b3c,#173b35 35%,#102131 78%);display:flex;align-items:center;justify-content:space-between;min-height:270px}
+.eyebrow{color:var(--lime);font-size:11px;letter-spacing:2px;font-weight:900}.hero h1{font-size:clamp(42px,7vw,68px);margin:12px 0}.hero h1 span{color:var(--lime)}.hero p{color:#d0dce2;line-height:1.6;max-width:480px}.hero .ball{font-size:105px}
+.section{margin:0 0 48px}.heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:17px}.heading h2{margin:0;font-size:27px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:15px}.tabs button.active{background:var(--lime);color:#152313;border-color:var(--lime)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:18px}.live{color:var(--lime);font-weight:bold}.team{display:flex;align-items:center;justify-content:space-between;margin:12px 0;font-weight:bold}.score{font-size:18px}.overs{font-size:10px;color:var(--muted);text-align:right}.note{border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12px;line-height:1.5}
+.teams{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.teamcard{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 6px;font-size:13px;font-weight:bold}.emoji{font-size:25px;display:block;margin-bottom:7px}
+.notice{background:#3b2d19;border:1px solid #6c522c;color:#ffdfa7;padding:13px;border-radius:9px;font-size:12px;line-height:1.5;margin-bottom:14px}
+footer{border-top:1px solid var(--line);padding:25px max(18px,5vw);color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:10px}
+@media(max-width:700px){nav{display:none}.hero{padding:35px 24px}.hero .ball{font-size:70px}.cards{grid-template-columns:1fr}.teams{grid-template-columns:repeat(2,1fr)}.heading{align-items:start;flex-direction:column}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="logo">🏏 CRICKET<span>LIVE</span></div><nav><a href="#scores" data-en="Scores" data-hi="स्कोर">Scores</a><a href="#teams" data-en="IPL Teams" data-hi="आईपीएल टीमें">IPL Teams</a><a href="#about" data-en="About" data-hi="जानकारी">About</a></nav><div class="actions"><button id="lang">हिंदी</button></div></header>
+<main>
+<section class="hero"><div><div class="eyebrow" data-en="THE GAME. THE MOMENT." data-hi="खेल का हर पल">THE GAME. THE MOMENT.</div><h1 data-en="Cricket, <span>Live.</span>" data-hi="क्रिकेट, <span>लाइव।</span>">Cricket, <span>Live.</span></h1><p data-en="Every run. Every wicket. Every moment — all in one place." data-hi="हर रन, हर विकेट और हर पल — सब एक ही जगह।">Every run. Every wicket. Every moment — all in one place.</p></div><div class="ball">🏏</div></section>
+<section class="section" id="scores"><div class="heading"><div><div class="eyebrow" data-en="MATCH CENTRE" data-hi="मैच सेंटर">MATCH CENTRE</div><h2 data-en="Cricket Scores" data-hi="क्रिकेट स्कोर">Cricket Scores</h2></div><button id="refresh" data-en="↻ Refresh" data-hi="↻ रिफ्रेश">↻ Refresh</button></div>
+<div class="notice" data-en="Demo preview: these are sample scores, not live match data. A secure cricket API connection will be added after backend hosting and API key setup." data-hi="डेमो प्रीव्यू: ये नमूना स्कोर हैं, लाइव मैच डेटा नहीं। असली क्रिकेट API जोड़ने के लिए सुरक्षित बैकएंड होस्टिंग और API Key की जरूरत होगी।">Demo preview: these are sample scores, not live match data. A secure cricket API connection will be added after backend hosting and API key setup.</div>
+<div class="tabs"><button class="active" data-filter="all" data-en="All" data-hi="सभी">All</button><button data-filter="live" data-en="Live" data-hi="लाइव">Live</button><button data-filter="upcoming" data-en="Upcoming" data-hi="आगामी">Upcoming</button><button data-filter="result" data-en="Results" data-hi="नतीजे">Results</button></div><div class="cards" id="matchCards"></div></section>
+<section class="section" id="teams"><div class="eyebrow" data-en="INDIAN PREMIER LEAGUE" data-hi="इंडियन प्रीमियर लीग">INDIAN PREMIER LEAGUE</div><h2 data-en="IPL Teams" data-hi="आईपीएल टीमें">IPL Teams</h2><br><div class="teams" id="teamCards"></div></section>
+<section class="section" id="about"><div class="eyebrow" data-en="ABOUT" data-hi="हमारे बारे में">ABOUT</div><h2 data-en="Your cricket, your language." data-hi="आपका क्रिकेट, आपकी भाषा।">Your cricket, your language.</h2><p style="color:var(--muted);line-height:1.7" data-en="An independent cricket website demo, designed for mobile and desktop. Not affiliated with Cricbuzz, BCCI or IPL." data-hi="मोबाइल और कंप्यूटर के लिए बनाई गई स्वतंत्र क्रिकेट वेबसाइट का डेमो। Cricbuzz, BCCI या IPL से संबद्ध नहीं।">An independent cricket website demo, designed for mobile and desktop. Not affiliated with Cricbuzz, BCCI or IPL.</p></section>
+</main><footer><b>🏏 CRICKET<span style="color:var(--lime)">LIVE</span></b><span>Independent cricket project · Hindi + English</span></footer>
+<script>
+const matches=[
+{type:"live",series:"T20 · DEMO",a:"India 🇮🇳",as:"184/5",ao:"18.2 ov",b:"Australia 🇦🇺",bs:"162/7",bo:"19.0 ov",note:"India need 21 runs from 10 balls"},
+{type:"upcoming",series:"ODI · DEMO",a:"England 🏴",as:"—",ao:"",b:"New Zealand 🇳🇿",bs:"—",bo:"",note:"Sample upcoming fixture"},
+{type:"result",series:"TEST · DEMO",a:"South Africa 🇿🇦",as:"312 & 201",ao:"",b:"Pakistan 🇵🇰",bs:"255 & 198",bo:"",note:"Sample result"}
+];
+const teams=[["CSK","🦁"],["MI","🌊"],["RCB","👑"],["KKR","💜"],["RR","🩷"],["SRH","🧡"],["DC","🔵"],["PBKS","❤️"],["GT","🟦"],["LSG","💙"]];
+let filter="all",hindi=false;
+function render(){let list=matches.filter(m=>filter==="all"||m.type===filter);document.getElementById("matchCards").innerHTML=list.map(m=>`<article class="card"><div class="meta"><span>${m.series}</span><b class="${m.type==="live"?"live":""}">${m.type.toUpperCase()}</b></div><div class="team"><span>${m.a}</span><span><div class="score">${m.as}</div><div class="overs">${m.ao}</div></span></div><div class="team"><span>${m.b}</span><span><div class="score">${m.bs}</div><div class="overs">${m.bo}</div></span></div><div class="note">${m.note}</div></article>`).join("")||"<p>No matches.</p>"}
+document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-filter]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.filter;render()});
+document.getElementById("teamCards").innerHTML=teams.map(t=>`<div class="teamcard"><span class="emoji">${t[1]}</span>${t[0]}</div>`).join("");
+document.getElementById("refresh").onclick=()=>{render();};
+document.getElementById("lang").onclick=()=>{hindi=!hindi;document.documentElement.lang=hindi?"hi":"en";document.getElementById("lang").textContent=hindi?"English":"हिंदी";document.querySelectorAll("[data-en]").forEach(el=>el.innerHTML=hindi?el.dataset.hi:el.dataset.en)};
+render();
+</script>
+</body></html>
